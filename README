@@ -1,0 +1,43 @@
+A Train Ticket Booking application using CUDA.
+There are N trains with the train numbers being 0, 1, 2, · · · N − 1. Each train has a variable M number of classes (the classes being 0, 1, 2, · · · M −1) 
+with each class having a maximum capacity. Each train is also associated with a source station (src) and a destination station (dest).
+The src station is never the same as the dest station. The list of station that the train goes through is either 
+[src, src+1, src+2, · · · , dest] or [dest, dest−1, dest−2, · · · , src] depending on whether src < dest or src > dest respectively.
+
+
+The booking requests are split across batches and they are processed in
+the following manner:
+• All the requests in Batch i are processed before the requests in Batch i + 1 are processed.
+• All the requests within the same batch belonging to the same train and same class are to be processed in order of their RequestID. 
+• Requests belonging to different trains / same train and different classes are to processed in parallel so as to maximise the number of requests
+being processed at a given time.
+
+####### Input Format
+• First line contains N // the number of trains.
+• For each of the N trains, the following is given:
+– Train Number, Number of Classes (M), Source (src), Destination
+(dest)
+– The next M lines contains Class Number, Max Capacity
+• Next line contains B //the number of batches
+• For each of the B batches, the following is given:
+– R //Number of requests in the given batch
+– Each of the R requests is of the form: Request ID, Train Number,
+Class, Source, Destination, Number of Seats
+
+
+####### Output Format
+For each request in the batch, We print success or failure depending on
+whether the request could be processed or not. After each batch is processed,
+the following is printed in different lines:
+• Number of requests that succeeded <space> Number of requests that failed
+• Total number of seats that were booked in the given batch.
+
+######### Constraints
+• 1 ≤ N ≤ 100000 (number of trains)
+• 1 ≤ M ≤ 25 (number of classes in each train)
+2
+• 1 ≤ B ≤ 5000 (number of batches of requests)
+• 1 ≤ R ≤ 5000 (number of requests in a batch)
+• 1 ≤ C ≤ 100 (max capacity of any class)
+• 1 ≤ abs(dest − src) ≤ 50
+• src ≥ 0, dest ≥ 0
